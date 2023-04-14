@@ -4,27 +4,37 @@
   font-family: "Roboto";
   text-align: center;
   height: 100dvh;
+  width: 100dvw;
   overflow: hidden;
+  position: relative;
 }
 /*Nav*/
 #arrowOut {
   display: flex;
   align-items: center;
+  padding-left: 0.5em;
+}
+#arrowOut:hover {
+  color: white;
+  animation: backNforth 1s linear infinite;
 }
 #navContainer {
+  position: absolute;
+  left: -266px;
   display: flex;
   justify-content: space-between;
   height: 100%;
   width: 20%;
+  transition: left 1s ease-in-out;
 }
 #sideNavigation {
+  width: 70%;
   padding: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: solid transparent;
-  border-width: 0 20px 0 0;
-  border-image: linear-gradient(transparent, darkorange);
+  border-right: solid darkorange 1pt;
+  background-image: linear-gradient(white, transparent);
 }
 #logoBox {
   width: 100px;
@@ -41,6 +51,11 @@
   font-weight: 900;
   font-size: 20pt;
 }
+hr {
+  border-bottom: 1pt solid darkorange;
+  width: 100%;
+  transition: width 1s ease-in-out;
+}
 #locations {
   margin-top: 1em;
   display: flex;
@@ -51,23 +66,100 @@
   font-size: 15pt;
   font-weight: 400;
 }
+
 #locations a {
+  padding: 0.5em 0;
   text-decoration: none;
   color: darkblue;
   transition: color 0.3s ease-in-out, box-shadow 1s ease-in-out,
     border-radius 0.5s ease-in-out;
+  transform: rotate(-90deg) translateY(-100px);
 }
+#locations a:nth-child(2) {
+  animation-delay: 0.6s;
+}
+#locations a:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
 #locations a:hover {
   color: black;
   box-shadow: inset 0 0 10px gray;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
-@keyframes App-logo-spin {
+/*Main*/
+#mainPageContainer {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(188, 188, 224);
+  padding: 1em;
+}
+
+/*Added and removed with JS*/
+.selectedPage {
+  color: darkorange;
+}
+.showNav {
+  left: 0 !important;
+}
+.hide {
+  display: none;
+}
+.navAnimation {
+  animation: navBarLocations 1s ease-in-out 0.3s forwards;
+}
+.navOpened {
+  animation: arrowOpen 0.5s ease-in-out forwards;
+}
+.navClosed {
+  animation: navOut 1s ease-in-out forwards;
+}
+
+@keyframes arrowOpen {
   from {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes navBarLocations {
+  0% {
+    transform: translateX(-110px) rotate(-90deg);
+  }
+  40% {
+    transform: translateX(110px) rotate(-90deg);
+  }
+  50% {
+    transform: translateX(-20px) rotate(-90deg);
+  }
+  75% {
+    transform: translateX(-20px) rotate(45deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes navOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-60px);
+  }
+}
+
+@keyframes backNforth {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
